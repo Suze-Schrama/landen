@@ -1,5 +1,6 @@
 package be.vdab.landen;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -19,8 +20,10 @@ public class GebruikerController {
         }
     }
 
+    public record User (String username){}
+
     @GetMapping("/user")
-    public String getUser(String user){
-        return System.getProperty("user.name");
+    public ResponseEntity<User> getUser() {
+        return ResponseEntity.ok(new User(System.getProperty("user.name")));
     }
 }
